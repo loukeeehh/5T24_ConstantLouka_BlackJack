@@ -8,29 +8,13 @@ namespace blackjack
 {
     public struct mesMorceaux
     {
-        /*
-        public void genereTableauJoueurs(out int[] T)
-        {
-
-            T = new int[6];
-            Random alea = new Random();
-
-            for (int i = 0; i <= T.Length - 5; i++)
-            {
-
-                T[i] = alea.Next(1, 11);
-
-            }
-
-        }
-        */
-        public void sommeTableau(ref int[] T, out int sum)
+       /* public void sommeTableau(ref int[] T, out int sum)
         {
             sum = T.Sum();
 
         }
-
-        public void tireCarte(ref int[,] T, int numPioche, int numJoueur /* lignes */)
+       */
+        public void tireCarte(ref int[,] T, int numPioche, int numJoueur /* lignes */) // procédure qui permet de tirer une carte
         {
 
             int carte = new Random().Next(1, 12);
@@ -38,7 +22,7 @@ namespace blackjack
              
         }
 
-        public void totalScoreJoueurs(int[,] T, int numJoueur /*lignes*/, out int total)
+        public void totalScoreJoueurs(int[,] T, int numJoueur /*lignes*/, out int total) //calculer le total des points des joueurs
         {
             int i;
             total = 0;
@@ -50,7 +34,7 @@ namespace blackjack
         }
 
 
-        public void genereMatrice(out int[,] Matrice)
+        public void genereMatrice(out int[,] Matrice) // procédure pour générer une matrice
         {
             int lignes = 5;
             int colonnes = 6;
@@ -80,7 +64,7 @@ namespace blackjack
         }
 
 
-        public void concateneMatrice(int[,] Matrice, out string concatene)
+        public void concateneMatrice(int[,] Matrice, out string concatene) // procédure pour concaténer la matrice
         {
             concatene = "";
 

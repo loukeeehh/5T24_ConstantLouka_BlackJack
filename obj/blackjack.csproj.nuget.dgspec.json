@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\louka\\OneDrive\\Documents\\blackjack\\blackjack.csproj": {}
+    "C:\\Users\\louka\\OneDrive\\Documents\\blackjack\\5T24_ConstantLouka_BlackJack\\blackjack.csproj": {}
   },
   "projects": {
-    "C:\\Users\\louka\\OneDrive\\Documents\\blackjack\\blackjack.csproj": {
+    "C:\\Users\\louka\\OneDrive\\Documents\\blackjack\\5T24_ConstantLouka_BlackJack\\blackjack.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\louka\\OneDrive\\Documents\\blackjack\\blackjack.csproj",
+        "projectUniqueName": "C:\\Users\\louka\\OneDrive\\Documents\\blackjack\\5T24_ConstantLouka_BlackJack\\blackjack.csproj",
         "projectName": "blackjack",
-        "projectPath": "C:\\Users\\louka\\OneDrive\\Documents\\blackjack\\blackjack.csproj",
+        "projectPath": "C:\\Users\\louka\\OneDrive\\Documents\\blackjack\\5T24_ConstantLouka_BlackJack\\blackjack.csproj",
         "packagesPath": "C:\\Users\\louka\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\louka\\OneDrive\\Documents\\blackjack\\obj\\",
+        "outputPath": "C:\\Users\\louka\\OneDrive\\Documents\\blackjack\\5T24_ConstantLouka_BlackJack\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

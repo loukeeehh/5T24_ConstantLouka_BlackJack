@@ -7,8 +7,12 @@
             
             Console.WriteLine("Bienvenue au BlakJack !");
             int[,] TScoreUsers; // Matrice des scores de joueurs
-            int numPioche = 1; // rajouter une carte
-            int totalPoints = 0;
+            int numPioche; // rajouter une carte
+            int totalPoints; // total point d'un joueur
+            int[] totauxPointsJoueur = new int[5];
+            int maxPoints = 0; // points maximum atteint sur le jeu
+            int numJoueurGagnant; // numéro du joueur gagnant
+            int tour = 0; // booléen du jeu en cours
             string nUser; //réponse de l'utilisateur
             string message;
             string repeatProg; // répétition du programme
@@ -43,13 +47,12 @@
                     Console.WriteLine($"{message}\n");
                     morceauxProg.afficherTableauJoueurs(TScoreUsers, out message);
                     Console.WriteLine(message);
-
+                    numPioche = 1;
                     
 
-                    while (totalPoints < 21)
+                    while (tour <= 3)
                     {
-                        numPioche = 1;
-
+                
                         for (int i = 0; i <= TScoreUsers.GetLength(0) - 1; i++)
                         {
 
@@ -61,33 +64,76 @@
                                 morceauxProg.tireCarte(ref TScoreUsers, numPioche, i);
                                 
                             }
-                            
-                        }
-                        
 
+                            morceauxProg.totalScoreJoueurs(TScoreUsers, i, out totalPoints);
+                            totauxPointsJoueur[i] = totalPoints;
+
+                            if (totalPoints > 21)
+                            {
+                                Console.WriteLine($"\nJoueur {i}, vous n'avez perdu !\n");
+                            }
+
+                        }
+                        numPioche++;
+                        
                         Console.WriteLine("Vos cartes :");
                         morceauxProg.concateneMatrice(TScoreUsers, out message);
                         Console.WriteLine($"{message}\n");
-                        Console.Write("Les résultats :\n");
-                        morceauxProg.totalScoreJoueurs(TScoreUsers, numPioche, out totalPoints);
-                        Console.WriteLine($"Votre score est de {totalPoints}");
+                        Console.Write("Les résultats à l'issue de ce tour :\n");
 
-                        
+                        for (int i = 0; i < totauxPointsJoueur.Length; i++)
+                        {
+                            Console.WriteLine($"Joueur {i}, votre score est de {totauxPointsJoueur[i]}");
+                        }
+
+                        if (nUser != "t")
+                        {
+                            maxPoints = 0;
+                            numJoueurGagnant = -1;
+
+                            for (int i = 0; i < totauxPointsJoueur.Length; i++)
+                            {
+                                if (totauxPointsJoueur[i] > maxPoints && totauxPointsJoueur[i] <= 21)
+                                {
+                                    maxPoints = totauxPointsJoueur[i];
+                                    numJoueurGagnant = i;
+                                }
+                            }
+
+                            if (maxPoints == 21)
+                            {
+                                Console.WriteLine($"Bravo, Joueur {numJoueurGagnant}, vous avez atteint 21 et gagné !");
+                            }
+
+                            else if (maxPoints <= 21)
+                            {
+                                Console.WriteLine($"Félicitations, Joueur {numJoueurGagnant}, vous avez gagné avec un score de {maxPoints} !");
+                            }
+
+                            else if (maxPoints > 21)
+                            {
+                                Console.WriteLine("Vous avez dépassé 21. Perdu !");
+                            }
+
+                            else if (maxPoints == maxPoints)
+                            {
+                                Console.WriteLine("Égalité !");
+                            }
+
+                            /*gameInProgress = false;
+                        for (int i = 0; i < totauxPointsJoueur.Length; i++)
+                        {
+                            if (totauxPointsJoueur[i] < 21)
+                            {
+                                gameInProgress = true;
+                                break;
+                            }
+                        }*/
+
+
+                        }
+
                     }
-                    
-
-                    if (totalPoints > 21)
-                    {
-                        Console.WriteLine("Vous avez perdu !");
-                    }
-
-                    if (totalPoints == 21)
-                    {
-                        Console.WriteLine("Bravo, vous avez gagné !");
-                    }
-
-                    numPioche += 1;
-
 
                 }
 
