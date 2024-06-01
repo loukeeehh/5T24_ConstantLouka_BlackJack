@@ -12,7 +12,8 @@
             int[] totauxPointsJoueur = new int[5];
             int maxPoints = 0; // points maximum atteint sur le jeu
             int numJoueurGagnant; // numéro du joueur gagnant
-            int tour = 0; // booléen du jeu en cours
+            int tour = 1; // booléen du jeu en cours
+            bool[] jeuFini  = new bool [5];
             string nUser; //réponse de l'utilisateur
             string message;
             string repeatProg; // répétition du programme
@@ -20,6 +21,11 @@
 
             do
             {
+                for (int i = 0; i <= jeuFini.Length - 1; i++)
+                {
+                    jeuFini[i] = false;
+                }
+                
                 Console.WriteLine("Avant de vouloir commencer cette partie, voulez-vous les règles ?");
                 Console.WriteLine(" - Taper 1 pour les voir.\n - Taper 2 pour les passer.");
                 nUser = Console.ReadLine();
@@ -50,27 +56,31 @@
                     numPioche = 1;
                     
 
-                    while (tour <= 3)
+                    while (numPioche <= 3)
                     {
                 
                         for (int i = 0; i <= TScoreUsers.GetLength(0) - 1; i++)
                         {
-
-                            Console.WriteLine("Voulez-vous tirer une carte ? 't' pour tirer une carte, 'r' pour rester ");
-                            nUser = Console.ReadLine();
-
-                            if (nUser == "t")
+                            if (!jeuFini[i])
                             {
-                                morceauxProg.tireCarte(ref TScoreUsers, numPioche, i);
-                                
+                                Console.WriteLine($"Joueur {i} Voulez-vous tirer une carte ? 't' pour tirer une carte, 'r' pour rester ");
+                                nUser = Console.ReadLine();
+
+                                if (nUser == "t")
+                                {
+                                    morceauxProg.tireCarte(ref TScoreUsers, numPioche, i);
+
+                                }
                             }
+                            
 
                             morceauxProg.totalScoreJoueurs(TScoreUsers, i, out totalPoints);
                             totauxPointsJoueur[i] = totalPoints;
 
                             if (totalPoints > 21)
                             {
-                                Console.WriteLine($"\nJoueur {i}, vous n'avez perdu !\n");
+                                //Console.WriteLine($"\nJoueur {i}, vous avez perdu !\n");
+                                jeuFini[i] = true;
                             }
 
                         }
@@ -85,54 +95,35 @@
                         {
                             Console.WriteLine($"Joueur {i}, votre score est de {totauxPointsJoueur[i]}");
                         }
+   
 
-                        if (nUser != "t")
+                    } 
+
+                    maxPoints = 0;
+                    numJoueurGagnant = -1;
+
+                    for (int i = 0; i < totauxPointsJoueur.Length; i++)
+                    {
+                        if (totauxPointsJoueur[i] > maxPoints && totauxPointsJoueur[i] <= 21 && jeuFini[i] == false)
                         {
-                            maxPoints = 0;
-                            numJoueurGagnant = -1;
-
-                            for (int i = 0; i < totauxPointsJoueur.Length; i++)
-                            {
-                                if (totauxPointsJoueur[i] > maxPoints && totauxPointsJoueur[i] <= 21)
-                                {
-                                    maxPoints = totauxPointsJoueur[i];
-                                    numJoueurGagnant = i;
-                                }
-                            }
-
-                            if (maxPoints == 21)
-                            {
-                                Console.WriteLine($"Bravo, Joueur {numJoueurGagnant}, vous avez atteint 21 et gagné !");
-                            }
-
-                            else if (maxPoints <= 21)
-                            {
-                                Console.WriteLine($"Félicitations, Joueur {numJoueurGagnant}, vous avez gagné avec un score de {maxPoints} !");
-                            }
-
-                            else if (maxPoints > 21)
-                            {
-                                Console.WriteLine("Vous avez dépassé 21. Perdu !");
-                            }
-
-                            else if (maxPoints == maxPoints)
-                            {
-                                Console.WriteLine("Égalité !");
-                            }
-
-                            /*gameInProgress = false;
-                        for (int i = 0; i < totauxPointsJoueur.Length; i++)
-                        {
-                            if (totauxPointsJoueur[i] < 21)
-                            {
-                                gameInProgress = true;
-                                break;
-                            }
-                        }*/
-
-
+                            maxPoints = totauxPointsJoueur[i];
+                            numJoueurGagnant = i;
                         }
+                    }
 
+                    if (maxPoints == 21)
+                    {
+                        Console.WriteLine($"Bravo, Joueur {numJoueurGagnant}, vous avez atteint {maxPoints} et gagné !");
+                    }
+
+                    else if (maxPoints <= 21)
+                    {
+                        Console.WriteLine($"Félicitations, Joueur {numJoueurGagnant}, vous avez gagné avec un score de {maxPoints} !");
+                    }
+
+                    else if (maxPoints > 21)
+                    {
+                        Console.WriteLine($"{numJoueurGagnant}, vous avez dépassé 21 ! Vous avez Perdu avec {maxPoints} !");
                     }
 
                 }
